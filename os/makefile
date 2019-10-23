@@ -1,22 +1,15 @@
 # -- Useful variables -------------------------------------------------------
 
 # default target
-default: show-info all
+default: all
 
-# phony targets
-.PHONY: all
 all:
-	@echo Target $(TARGET) build finished.
+	@echo "main:   "$(__project_path__)
+	@echo "main:   "$(__makefile__)
+	@echo "main:   "$(MAKE)
 
-
-.PHONY: show-info
-show-info:
-	@echo $(__project_path__)
-	@echo $(__makefile__)
-# @echo $(mkfile_path)
-# @echo $(PROJECT_PATH)
-# @echo $(MAKE_INCLUDE)
-# @echo $(SUB_MAKE_INCLUDE)
+	@echo "=== Building project ==="
+	$(MAKE) --directory=src
 
 
 # -- name section here ------------------------------------------------------
@@ -25,12 +18,30 @@ __project_path__ := $(patsubst %/,%,$(dir $(__makefile__)))
 
 
 
-mkfile_path := $(abspath $(firstword $(MAKEFILE_LIST)))
-PROJECT_PATH := $(patsubst %/,%,$(dir $(mkfile_path)))
-MAKE_INCLUDE=$(PROJECT_PATH)/config/make.global
-SUB_MAKE_INCLUDE=$(PROJECT_PATH)/config/submake.global
 
-include src/makefile
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# mkfile_path := $(abspath $(firstword $(MAKEFILE_LIST)))
+# PROJECT_PATH := $(patsubst %/,%,$(dir $(mkfile_path)))
+# MAKE_INCLUDE=$(PROJECT_PATH)/config/make.global
+# SUB_MAKE_INCLUDE=$(PROJECT_PATH)/config/submake.global
+
 
 # need to be placed at the end of the file
 
